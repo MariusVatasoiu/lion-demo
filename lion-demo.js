@@ -1,26 +1,21 @@
 import { html, LitElement } from 'lit';
 
-// As a side-effect this way of importing defines the custom elements, eg. <lion-button>, ready for use
-import '@lion/ui/define/lion-button.js';
-import '@lion/ui/define/lion-tooltip.js';
+import 'https://esm.sh/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js'
+import '@lion/ui/define/lion-select-rich.js';
+import '@lion/ui/define/lion-option.js';
 
 export class LionDemo extends LitElement {
-  static properties = {
-    header: { type: String },
-    counter: { type: Number },
-  };
-  constructor() {
-    super();
-    this.header = 'Hey dev';
-    this.counter = 0;
-  }
   render() {
     return html`
-      <h1>${this.header}! Increment is at Nr: ${this.counter}</h1>
-      <lion-tooltip has-arrow>
-        <lion-button slot="invoker" @click=${() => {this.counter += 1; console.log(this.counter);}}>increment</lion-button>
-        <span slot="content"> +1 </span>
-      </lion-tooltip>
+    <lion-select-rich id="select" name="favoriteColor" label="Favorite color">
+    <lion-option .choiceValue="${'red'}">Red</lion-option>
+    <lion-option .choiceValue="${'hotpink'}">Hotpink</lion-option>
+    <lion-option .choiceValue="${'blue'}">Blue</lion-option>
+  </lion-select-rich>
+  
+  <Load this example in Chrome older than v99.
+  <p>Click the button and check the console. You should see something like this:</p>
+  <button id="remove-select" @click=${() => this.shadowRoot.querySelector('#select')?.remove?.()}>Remove lion-select-rich</button>
     `;
   }
 }
